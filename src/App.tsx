@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import CustomerList from './components/CustomerList';
 
 const App: React.FC<object> = () => {
 	const [customers, setCustomers] = useState<Customer[]>([]);
@@ -37,6 +38,8 @@ const App: React.FC<object> = () => {
 	return (
 		<div className="container">
 			<h1>Customer Management</h1>
+			<CustomerList customers={filteredCustomers} highlightOldest={highlightOldest} />
+
 		</div>
 	);
 };
