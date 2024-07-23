@@ -9,6 +9,7 @@ interface FilterProps {
 
 const Filter: React.FC<FilterProps> = ({ onNameFilter, onCityFilter, onHighlightChange, customers }) => {
 	const [name, setName] = useState('');
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [city, setCity] = useState('');
 	const [highlight, setHighlight] = useState(false);
 
