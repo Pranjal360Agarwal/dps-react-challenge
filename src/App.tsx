@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import CustomerList from './components/CustomerList';
+import Filter from './components/Filter';
 
 const App: React.FC<object> = () => {
 	const [customers, setCustomers] = useState<Customer[]>([]);
@@ -38,6 +39,13 @@ const App: React.FC<object> = () => {
 	return (
 		<div className="container">
 			<h1>Customer Management</h1>
+			<Filter 
+				onNameFilter={handleNameFilter} 
+				onCityFilter={handleCityFilter} 
+				onHighlightChange={handleHighlightChange} 
+				customers={customers} 
+			/>
+
 			<CustomerList customers={filteredCustomers} highlightOldest={highlightOldest} />
 
 		</div>
