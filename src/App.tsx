@@ -27,6 +27,13 @@ const App: React.FC<object> = () => {
 	const handleHighlightChange = (highlight: boolean) => {
 		setHighlightOldest(highlight);
 	};
+	const filteredCustomers = customers
+		.filter(customer => 
+			customer.firstName.toLowerCase().includes(filterName.toLowerCase()) || 
+		customer.lastName.toLowerCase().includes(filterName.toLowerCase())
+		)
+		.filter(customer => filterCity ? customer.address.city === filterCity : true);
+
 	return (
 		<div className="container">
 			<h1>Customer Management</h1>
