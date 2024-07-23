@@ -20,6 +20,10 @@ const Filter: React.FC<FilterProps> = ({ onNameFilter, onCityFilter, onHighlight
 		return () => clearTimeout(debounce);
 	}, [name, onNameFilter]);
 
+	const uniqueCities = [...new Set(customers.map(customer => customer.address.city))];
+
+    
+
 	return (
 		<div className="filter-container">
 			<input 
@@ -37,6 +41,9 @@ const Filter: React.FC<FilterProps> = ({ onNameFilter, onCityFilter, onHighlight
 				className="filter-select"
 			>
 				<option value="">Select city</option>
+				{uniqueCities.map(city => (
+					<option key={city} value={city}>{city}</option>
+				))}
 			</select>
 			<label className="highlight-checkbox">
 				<input 
