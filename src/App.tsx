@@ -3,6 +3,9 @@ import './App.css';
 
 const App: React.FC<object> = () => {
 	const [customers, setCustomers] = useState<Customer[]>([]);
+	const [filterName, setFilterName] = useState('');
+	const [filterCity, setFilterCity] = useState('');
+	const [highlightOldest, setHighlightOldest] = useState(false);
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await fetch('https://dummyjson.com/users');
@@ -13,6 +16,17 @@ const App: React.FC<object> = () => {
 		fetchData();
 	}, []);
 
+	const handleNameFilter = (name: string) => {
+		setFilterName(name);
+	};
+
+	const handleCityFilter = (city: string) => {
+		setFilterCity(city);
+	};
+
+	const handleHighlightChange = (highlight: boolean) => {
+		setHighlightOldest(highlight);
+	};
 	return (
 		<div className="container">
 			<h1>Customer Management</h1>
