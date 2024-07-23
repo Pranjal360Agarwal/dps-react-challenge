@@ -16,6 +16,20 @@ interface CustomerListProps {
 }
 
 const CustomerList: React.FC<CustomerListProps> = ({ customers, highlightOldest }) => {
+	const getOldestPerCity = (customers: Customer[]) => {
+		const oldestPerCity: { [city: string]: Customer } = {};
+
+		customers.forEach(customer => {
+			if (!oldestPerCity[customer.address.city] || new Date(customer.birthDate) < new Date(oldestPerCity[customer.address.city].birthDate)) {
+				oldestPerCity[customer.address.city] = customer;
+			}
+		});
+
+		return oldestPerCity;
+	};
+
+	const oldestCustomers = getOldestPerCity(customers);
+
 	return (
 		<table className="customer-table">
 			<thead>
@@ -27,7 +41,7 @@ const CustomerList: React.FC<CustomerListProps> = ({ customers, highlightOldest 
 			</thead>
 			<tbody>
 				{customers.map(customer => (
-					<tr key={customer.id}>
+					<tr key={customer.id} style={{ backgroundColor: highlightOldest && oldestCustomers[customer.address.city]?.id === customer.id ? 'lightblue' : 'white' }}>
 						<td>{customer.firstName} {customer.lastName}</td>
 						<td>{customer.address.city}</td>
 						<td>{new Date(customer.birthDate).toLocaleDateString()}</td>
