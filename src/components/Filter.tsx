@@ -12,6 +12,14 @@ const Filter: React.FC<FilterProps> = ({ onNameFilter, onCityFilter, onHighlight
 	const [city, setCity] = useState('');
 	const [highlight, setHighlight] = useState(false);
 
+	useEffect(() => {
+		const debounce = setTimeout(() => {
+			onNameFilter(name);
+		}, 1000);
+
+		return () => clearTimeout(debounce);
+	}, [name, onNameFilter]);
+
 	return (
 		<div className="filter-container">
 			<input 
