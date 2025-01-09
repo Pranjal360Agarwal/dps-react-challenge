@@ -9,8 +9,6 @@ interface FilterProps {
 
 const Filter: React.FC<FilterProps> = ({ onNameFilter, onCityFilter, onHighlightChange, customers }) => {
 	const [name, setName] = useState('');
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [city, setCity] = useState('');
 	const [highlight, setHighlight] = useState(false);
 
 	useEffect(() => {
@@ -35,10 +33,7 @@ const Filter: React.FC<FilterProps> = ({ onNameFilter, onCityFilter, onHighlight
 				className="filter-input"
 			/>
 			<select 
-				onChange={e => {
-					setCity(e.target.value);
-					onCityFilter(e.target.value);
-				}} 
+				onChange={e => onCityFilter(e.target.value)} 
 				className="filter-select"
 			>
 				<option value="">Select city</option>
